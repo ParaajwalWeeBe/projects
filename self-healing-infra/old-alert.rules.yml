@@ -1,0 +1,20 @@
+groups:
+  - name: self-heal.rules
+    rules:
+      - alert: NGINXDown
+        expr: vector(1)
+        for: 10s
+        labels:
+          severity: critical
+        annotations:
+          summary: "NGINX is down"
+          description: "NGINX at {{ $labels.instance }} is unreachable."
+
+      - alert: HighCPU
+        expr: 100 - (avg by(instance)(irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 90
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU usage > 90%"
+          description: "High CPU on {{ $labels.instance }}."
