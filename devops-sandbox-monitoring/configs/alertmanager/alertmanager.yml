@@ -1,0 +1,20 @@
+# configs/alertmanager/alertmanager.yml
+route:
+  receiver: "devnull"
+  group_by: ["alertname", "instance"]
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 4h
+  routes:
+    - matchers:
+        - severity="critical"
+      receiver: "devnull"
+    - matchers:
+        - severity="warning"
+      receiver: "devnull"
+
+receivers:
+  - name: "devnull"
+
+# Optional: Slack/email receivers can be added later for real notifications.
+

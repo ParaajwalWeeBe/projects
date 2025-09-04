@@ -1,0 +1,12 @@
+# configs/grafana/provisioning/dashboards/dashboards.yml
+apiVersion: 1
+providers:
+  - name: "Sandbox Dashboards"
+    orgId: 1
+    folder: ""
+    type: file
+    disableDeletion: false
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards
+

@@ -1,0 +1,62 @@
+{
+  "title": "Sandbox Overview",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "CPU Usage %",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "100 * (1 - avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])))",
+          "legendFormat": "{{instance}}"
+        }
+      ],
+      "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8}
+    },
+    {
+      "type": "graph",
+      "title": "Memory Usage %",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "100 * (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes))",
+          "legendFormat": "{{instance}}"
+        }
+      ],
+      "gridPos": {"x": 12, "y": 0, "w": 12, "h": 8}
+    },
+    {
+      "type": "graph",
+      "title": "Disk Free %",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "100 * (node_filesystem_avail_bytes{fstype!~\"tmpfs|devtmpfs|overlay\"} / node_filesystem_size_bytes{fstype!~\"tmpfs|devtmpfs|overlay\"})",
+          "legendFormat": "{{mountpoint}}"
+        }
+      ],
+      "gridPos": {"x": 0, "y": 8, "w": 12, "h": 8}
+    },
+    {
+      "type": "graph",
+      "title": "Targets Up/Down",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "sum(up) by (job)",
+          "legendFormat": "{{job}} up"
+        },
+        {
+          "expr": "sum(1 - up) by (job)",
+          "legendFormat": "{{job}} down"
+        }
+      ],
+      "gridPos": {"x": 12, "y": 8, "w": 12, "h": 8}
+    }
+  ]
+}
+
