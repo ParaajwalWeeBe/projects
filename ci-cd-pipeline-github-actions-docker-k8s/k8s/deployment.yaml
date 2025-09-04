@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ci-demo-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ci-demo
+  template:
+    metadata:
+      labels:
+        app: ci-demo
+    spec:
+      containers:
+      - name: ci-demo
+        image: paraajwalweebe/ci-demo:latest
+        ports:
+        - containerPort: 5000
+
