@@ -1,0 +1,13 @@
+groups:
+  - name: nginx-monitoring
+    rules:
+      - alert: NGINXDown
+        expr: up{job="blackbox", instance="http://host.docker.internal:8090"} == 0
+        for: 30s
+        labels:
+          severity: critical
+          service: nginx
+        annotations:
+          summary: "NGINX is down"
+          description: "Prometheus cannot reach NGINX at port 8090 for at least 30 seconds. Triggering recovery action."
+

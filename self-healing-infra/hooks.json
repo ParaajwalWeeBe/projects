@@ -1,0 +1,15 @@
+[
+  {
+    "id": "nginx_recover",
+    "execute-command": "/opt/homebrew/bin/ansible-playbook",
+    "command-working-directory": "/Users/jaihanuman/tasks/projects/self-healing-infra",
+    "pass-arguments-to-command": [
+      { "source": "string", "name": "-i" },
+      { "source": "string", "name": "inventory" },
+      { "source": "string", "name": "recover-nginx.yml" }
+    ],
+    "logfile": "/Users/jaihanuman/tasks/projects/self-healing-infra/webhook.log",
+    "include-command-output-in-response": true
+  }
+]
+
