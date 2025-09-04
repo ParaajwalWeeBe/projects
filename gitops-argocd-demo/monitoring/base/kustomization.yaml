@@ -1,0 +1,6 @@
+resources:
+  - prometheus.yaml
+  - alertmanager.yaml
+  - grafana.yaml
+  - node-exporter.yaml
+
